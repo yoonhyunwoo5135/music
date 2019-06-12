@@ -59,11 +59,14 @@
 }
 #album{
 	position: absolute;
-	border: 1px solid black;
 	width: 700px;
 	height: 400px;
+	float: left;
 }
-#chart{
+#table{
+	margin-top: 25px;
+}
+#hotsearch{
 	position: absolute;
 	left: 700px;
 	width: 175px;
@@ -80,21 +83,36 @@
 	width: 900px;
 	height: 300px;
 }
-#notice{
+#chart{
 	position: absolute;
 	width: 450px;
 	height: 300px;
-	border: 1px solid black;
 }
-#news{
+#container{
 	position: absolute;
 	left: 450px;
 	width: 450px;
-	height: 300px;
-	border: 1px solid black;
+	height: 400px;
+}
+#notice{
+	padding-left: 20px;
+	position: absolute;
+	width: 450px;
+	height: 150px;
+}
+#news{
+	padding-left: 20px;
+	position: absolute;
+	margin-top: 150px;
+	width: 450px;
+	height: 150px;
+	font: 10px black;
+}
+#news1 li{
+	font-size: 15px;
 }
 #under{
-	margin-top: 700px;
+	margin-top: 800px;
 	position: absolute;
 	left: 475px;
 	width: 900px;
