@@ -25,6 +25,7 @@
 		%>
 		<div id = "top">
 			<div id = "title">
+				<a href="main.jsp"><img src="images/Title.png" style="border-radius: 10px 10px 10px 10px"></a>
 			</div>
 			
 			<div id = "search">
@@ -53,7 +54,7 @@
 			<table>
 				<ul>
 					<li class = "menuselect"><a href = "">음원차트</a>
-					<li class = "menuselect"><a href = "">최신음악</a>
+					<li class = "menuselect"><a href = "newmusic.jsp">최신음악</a>
 					<li class = "menuselect"><a href = "">뉴스토픽</a>
 					<li class = "menuselect"><a href = "">에디터추천</a>
 					<li class = "menuselect"><a href = "">공지사항</a>
@@ -63,25 +64,26 @@
 		<hr class = "hr">
 		<div id = "middle">
 			<div id = "album">
+				<h5 style="font-weight: bold">최신음악</h5>
 				<table id="table">
 					<tr>
-						<td><img src="images/<%= dto2.getImg() %>" alt="김나영"> </td>
-						<td><img src="images/music2.png"></td>
-						<td><img src="images/music3.png"></td>
-						<td><img src="images/music4.png"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/227/576/81227576_1560504311638_1_200x200.JPG" alt="" width="170px" height="170px"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/226/277/81226277_1560489296971_1_200x200.JPG" alt="" width="170px" height="170px"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/222/522/81222522_1560733312942_1_200x200.JPG" alt="" width="170px" height="170px"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/227/588/81227588_1560509622871_1_200x200.JPG" alt="" width="170px" height="170px"></td>
 					</tr>
 					<tr>
-						<td><img src="images/music5.png"></td>
-						<td><img src="images/music6.png"></td>
-						<td><img src="images/music7.png"></td>
-						<td><img src="images/music8.png"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/227/413/81227413_1560501711179_1_200x200.JPG" alt="" width="170px" height="170px"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/227/269/81227269_1560735807632_1_200x200.JPG" alt="" width="170px" height="170px"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/227/577/81227577_1560510801667_1_200x200.JPG" alt="" width="170px" height="170px"></td>
+						<td><img src="//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/227/026/81227026_1560735349252_1_200x200.JPG" alt="" width="170px" height="170px"></td>
 					</tr>
 				</table>
 			</div>
-			
+			<br>
 			<div id = "hotsearch">
-				<h5>인기 검색어</h5>
-				<br>
+			<h5 class = "hot" style="font-weight: bold">인기 검색어</h5>
+			<br>
 				<ol>
 					<li>구로점</li>
 					<li>구로점 폐쇄</li>
@@ -162,8 +164,9 @@
 			</div>
 		</div>
 		<div id = "under">
-			<a href = "">회사소개</a> | <a href ="">이용약관</a> | <a href="">개인정보처리방침</a> | <a href = "">청소년보호정책</a> | 이메일주소무단수집거부 | 서비스 이용문의
-		<div id = "under2">
+				<a href = "">회사소개</a> | <a href ="">이용약관</a> | <a href="">개인정보처리방침</a> | <a href = "">청소년보호정책</a> | 이메일주소무단수집거부 | 서비스 이용문의
+			<div id = "under2">
+			</div>
 		</div>
 	</body>
 </html>
