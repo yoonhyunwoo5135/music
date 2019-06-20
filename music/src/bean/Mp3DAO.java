@@ -3,6 +3,7 @@ package bean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Mp3DAO {
 	DBConnectionMgr mgr;
@@ -12,8 +13,8 @@ public class Mp3DAO {
 		mgr = DBConnectionMgr.getInstance();		
 	}
 	
-	public Mp3DTO select() {
-		
+	public ArrayList<Mp3DTO> select() {
+		ArrayList<Mp3DTO> list = new ArrayList<Mp3DTO>();
 		Mp3DTO dto = new Mp3DTO();
 		
 		//1,2단계를 해주는 DBconnectionMgr 객체 필요
@@ -46,6 +47,8 @@ public class Mp3DAO {
 			dto.setGenre(genre);
 			dto.setView(view);
 			dto.setImg(img);	
+			
+			list.add(dto);
 		}
 		ps.executeUpdate();
 		
@@ -54,7 +57,7 @@ public class Mp3DAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return dto;
+		return list;
 	}
 	
 	

@@ -1,3 +1,5 @@
+<%@page import="bean.Mp3DTO"%>
+<%@page import="bean.Mp3DAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -45,7 +47,7 @@
 			<table>
 				<ul>
 					<li class = "menuselect"><a href = "">음원차트</a>
-					<li class = "menuselect"><a href = "">최신음악</a>
+					<li class = "menuselect"><a href = "newmusic.jsp">최신음악</a>
 					<li class = "menuselect"><a href = "">뉴스토픽</a>
 					<li class = "menuselect"><a href = "">에디터추천</a>
 					<li class = "menuselect"><a href = "">공지사항</a>
@@ -57,7 +59,7 @@
 			<table id = "list">
 				<tr>
 					<td width="100px" height="100px">
-						<img src="images/music.png"
+						<img src="images/ %>"
 						alt="" width="100px" height="100px">
 					</td>
 					<td width="300px" height="100px">

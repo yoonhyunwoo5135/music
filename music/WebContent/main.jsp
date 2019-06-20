@@ -25,13 +25,7 @@
 		crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<jsp:useBean id="dto" class="bean.Mp3DTO"></jsp:useBean>
-		<jsp:setProperty property="*" name="dto"/>
-		<%
-			Mp3DAO dao = new Mp3DAO();
-			Mp3DTO dto2 = dao.select();
-			
-		%>
+	
 		<div id = "top">
 			<div id = "title">
 				<a href="main.jsp"><img src="images/Title.png" style="border-radius: 10px 10px 10px 10px"></a>
@@ -62,7 +56,7 @@
 		<div id = "menu">
 			<table>
 				<ul>
-					<li class = "menuselect"><a href = "">음원차트</a>
+					<li class = "menuselect"><a href = "rank.jsp">음원차트</a>
 					<li class = "menuselect"><a href = "newmusic.jsp">최신음악</a>
 					<li class = "menuselect"><a href = "">뉴스토픽</a>
 					<li class = "menuselect"><a href = "">에디터추천</a>
@@ -72,26 +66,43 @@
 		</div>
 		<hr class = "hr">
 		<div id = "middle">
-				<div id = "album">
-					<h5 style="font-weight: bold">최신음악</h5>
-					<a href="newmusic.jsp">
-						<table id="table">
-							<tr>
-								<td><img src="images/music.png" alt="" width="170px" height="170px"></td>
-								<td><img src="images/music2.png" alt="" width="170px" height="170px"></td>
-								<td><img src="images/music3.png" alt="" width="170px" height="170px"></td>
-								<td><img src="images/music4.png" alt="" width="170px" height="170px"></td>
-							</tr>
-							<tr>
-								<td><img src="images/music5.png" alt="" width="170px" height="170px"></td>
-								<td><img src="images/music6.png" alt="" width="170px" height="170px"></td>
-								<td><img src="images/music7.png" alt="" width="170px" height="170px"></td>
-								<td><img src="images/music8.png" alt="" width="170px" height="170px"></td>
-							</tr>
-						</table>
-					</a>
-				</div>
-			<br>
+			<div id = "album">
+				<h5 style="font-weight: bold">최신음악</h5>
+				<table>
+					<tbody>
+						<%
+							//메인의 앨범사진 1~4 / 4~8번 url 을 끌어옴
+							MusicDAO dao = new MusicDAO();
+							ArrayList<String> cover = dao.mainImage();
+						%>
+						<tr>
+							<%
+								for (int i = 0; i < 4; i++) {
+									String x = cover.get(i);
+							%>
+							<td><a href=""><img alt="이미지 없음" src=<%=x%> width=173px,
+									height=173px id="mainimage"></a></td>
+							<%
+								}
+							%>
+	
+						</tr>
+						<tr>
+							<%
+								for (int i = 4; i < 8; i++) {
+									String x = cover.get(i);
+							%>
+							<td><a href=""><img alt="이미지 없음" src=<%=x%> width=173px,
+									height=173px id="mainimage"></a></td>
+							<%
+								}
+							%>
+	
+						</tr>
+	
+					</tbody>
+				</table>
+			</div>
 			<div id = "hotsearch">
 			<h5 class = "hot" style="font-weight: bold">인기 검색어</h5>
 				<table>
