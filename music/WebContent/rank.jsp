@@ -53,7 +53,7 @@
 				<ul>
 					<li class="menuselect"><a href="rank.jsp">음원차트</a>
 					<li class="menuselect"><a href="newmusic.jsp">최신음악</a>
-					<li class="menuselect"><a href="">매거진</a>
+					<li class="menuselect"><a href="">뉴스토픽</a>
 					<li class="menuselect"><a href="">에디터추천</a>
 					<li class="menuselect"><a href="">공지사항</a>
 				</ul>

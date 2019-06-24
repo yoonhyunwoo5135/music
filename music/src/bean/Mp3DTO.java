@@ -7,7 +7,6 @@ public class Mp3DTO {
 	private String date;
 	private String genre;
 	private int view;
-	private String img;
 	
 	public int getNum() {
 		return num;
@@ -44,12 +43,6 @@ public class Mp3DTO {
 	}
 	public void setView(int view) {
 		this.view = view;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
 	}
 	
 	

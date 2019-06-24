@@ -38,15 +38,13 @@ public class Mp3DAO {
 			String date = rs.getString(4);
 			String genre = rs.getString(5);
 			int view = rs.getInt(6);
-			String img = rs.getString(7);
 			
 			dto.setNum(num);
 			dto.setTitle(title);
 			dto.setArtist(artist);
 			dto.setDate(date);
 			dto.setGenre(genre);
-			dto.setView(view);
-			dto.setImg(img);	
+			dto.setView(view);	
 			
 			list.add(dto);
 		}

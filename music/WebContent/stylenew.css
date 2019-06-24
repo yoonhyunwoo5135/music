@@ -50,39 +50,10 @@
 	position: absolute;
 	left: 475px;
 	width: 900px;
-	height: 400px;	
+	height: 1500px;
 }
 .hr{
 	margin-top: 70px;
-}
-#content{
-	position: absolute;
-	left: 475px;
-	width: 900px;
-	height: 800px;
-}
-#list{
-	width: 900px;
-	height: 800px;
-}
-#list tr{
-	width: 900px;
-	height: 100px;
-}
-#bottom{
-	margin-top: 400px;
-	position: absolute;
-	left: 475px;
-	width: 900px;
-	height: 300px;
-}
-#under{
-	margin-top: 800px;
-	position: absolute;
-	left: 475px;
-	width: 900px;
-	height: 38px;
-	font-size: 12px;
 }
 #under2{
 	width: 900px;
