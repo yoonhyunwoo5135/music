@@ -58,7 +58,7 @@
 	                  </td>
 	               </tr>
 	            </table>
-	        </div>
+        	</div>
 		</div>
 		<div id="menu">
 			<table>
@@ -67,7 +67,7 @@
 					<li class="menuselect"><a href="newmusic.jsp">최신음악</a>
 					<li class="menuselect"><a href="magazine.jsp">뉴스토픽</a>
 					<li class="menuselect"><a href="">공지사항</a>
-					<li class = "menuselect"><a href = "">통계</a>
+					<li class="menuselect"><a href="">통계</a>
 				</ul>
 			</table>
 		</div>
@@ -123,7 +123,7 @@
 							String[] cover = dao.image(); /* 앨범사진 URL을 배열로 만듦 */
 							ArrayList listAll = new ArrayList();
 							listAll = dao.selectAll();
-							for (int i = 0; i < 10; i++) {
+							for (int i = 40; i < 50; i++) {
 								MusicDTO dto = (MusicDTO) listAll.get(i);
 								String album = cover[i];
 						%>
@@ -142,41 +142,6 @@
 						%>
 				</table>
 
-			</div>
-			<div class = "newmusicchart2" style="width: 450; float: left">
-				<table border="5">
-						<tr>
-
-							<td align="center">IMAGE</td>
-							<td align="center">RANK</td>
-							<td align="center" width=50 style="word-break: break-all">TITLE</td>
-
-						</tr>
-						<%
-							MusicDAO dao2 = new MusicDAO();
-							dao.drop(); /* DB에 있는 자료 모두 버리고 순번 초기화 */
-							dao.top50(); /* top50개 음원 제목, 가수명 DB입력 */
-							String[] cover2 = dao2.image(); /* 앨범사진 URL을 배열로 만듦 */
-							ArrayList listAll2 = new ArrayList();
-							listAll2 = dao.selectAll();
-							for (int i = 10; i < 20; i++) {
-								MusicDTO dto = (MusicDTO) listAll2.get(i);
-								String album = cover2[i];
-						%>
-						<tr>
-
-							<td width="100px" height="100px;" align="center"><img alt="이미지 없음" src=<%=album%>></td>
-							<td width="50px" height="100px;" align="center"><%=dto.getNum() + "위"%></td>
-							<td width="250px" height="100px;" align="center"><a href="search.jsp?search=<%=dto.getTitle()%>" style="word-break:break-all"><%=dto.getTitle()%></a>
-								<br> <a href="search.jsp?search=<%=dto.getArtist()%>" style="word-break:break-all"><%=dto.getArtist()%></a><br> <br>
-								
-								<a href="player.jsp?mnum=<%=i%>&title=<%=dto.getTitle()%>&artist=<%=dto.getArtist()%>" target="_blank" class="btn btn-primary">PLAY▶</a><!-- 새 창으로 띄움 -->
-								</td>
-						</tr>
-						<%
-							}
-						%>
-				</table>
 			</div>
 			<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 		</div>

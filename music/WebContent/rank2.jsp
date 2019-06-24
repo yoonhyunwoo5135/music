@@ -58,7 +58,7 @@
 	                  </td>
 	               </tr>
 	            </table>
-	        </div>
+        	</div>
 		</div>
 		<div id="menu">
 			<table>
@@ -67,7 +67,7 @@
 					<li class="menuselect"><a href="newmusic.jsp">최신음악</a>
 					<li class="menuselect"><a href="magazine.jsp">뉴스토픽</a>
 					<li class="menuselect"><a href="">공지사항</a>
-					<li class = "menuselect"><a href = "">통계</a>
+					<li class="menuselect"><a href = "">통계</a>
 				</ul>
 			</table>
 		</div>
@@ -123,7 +123,7 @@
 							String[] cover = dao.image(); /* 앨범사진 URL을 배열로 만듦 */
 							ArrayList listAll = new ArrayList();
 							listAll = dao.selectAll();
-							for (int i = 0; i < 10; i++) {
+							for (int i = 20; i < 30; i++) {
 								MusicDTO dto = (MusicDTO) listAll.get(i);
 								String album = cover[i];
 						%>
@@ -159,7 +159,7 @@
 							String[] cover2 = dao2.image(); /* 앨범사진 URL을 배열로 만듦 */
 							ArrayList listAll2 = new ArrayList();
 							listAll2 = dao.selectAll();
-							for (int i = 10; i < 20; i++) {
+							for (int i = 30; i < 40; i++) {
 								MusicDTO dto = (MusicDTO) listAll2.get(i);
 								String album = cover2[i];
 						%>
@@ -177,6 +177,7 @@
 							}
 						%>
 				</table>
+
 			</div>
 			<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 		</div>

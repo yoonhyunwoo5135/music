@@ -25,42 +25,65 @@
 		crossorigin="anonymous"></script>
 	</head>
 	<body>
-	
+		<%
+			String query = request.getParameter("search");
+			String url = "https://www.genie.co.kr/search/searchMain?query="+query;
+			Document doc = null;
+			try {
+				doc = Jsoup.connect(url).get();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			Elements element = doc.select("span.cover-img");
+		
+			Elements img = element.select("img");//아티스트 이미지
+		%>
 		<div id = "top">
 			<div id = "title">
-				<a href="main.jsp"><img src="images/Title.png" style="border-radius: 10px 10px 10px 10px"></a>
+				<a href = "main.jsp"><img src="images/Title.png" style="border-radius: 10px 10px 10px 10px"></a>
 			</div>
 			
 			<div id = "search">
-				<form action="">
-					<input type="text" id = "searchbox" style = "width: 400px; height: 45px;" placeholder="검색어를 입력해주세요.">
+				<form action="search.jsp">
+					<input type="text" name = "search" id = "searchbox" style = "width: 400px; height: 45px;" placeholder="검색어를 입력해주세요.">
 					<button type="submit" class="btn btn-primary btn-lg">검색</button>
 				</form>
 			</div>
-			
 			<div id = "login">
-				<table>
-					<tr>
-						<td>
-							<img src = "images/Camel.png">
-						</td>
-						<td>
-							<form action="">
-								<button type="submit" id = "loginbutton" class="btn btn-info">로그인</button>
-							</form>
-						</td>
-					</tr>
-				</table>
-			</div>
+	            <table>
+	               <tr>
+	                  <td>
+	                     <img src = "images/Camel.png">
+	                  </td>
+	                  <td width="150px">
+	                     <%
+	                        Object userId = session.getAttribute("InputId");
+	                        if(userId != null){
+	                     %>
+	                     <b><%=session.getAttribute("InputId") %></b>님<br>안녕하세요 :)
+	                     
+	                     <form action="logout.jsp">
+	                        <button type="submit" id="logout" class="btn btn-dark">로그아웃</button>
+	                     </form>
+	                     
+	                     <%}else{%>
+	                     <form action="login.jsp">
+	                        <button type="submit" id = "loginbutton" class="btn btn-info">로그인</button>
+	                     </form>
+	                     <%} %>
+	                  </td>
+	               </tr>
+	            </table>
+        	</div>
 		</div>
 		<div id = "menu">
 			<table>
 				<ul>
 					<li class = "menuselect"><a href = "rank.jsp">음원차트</a>
 					<li class = "menuselect"><a href = "newmusic.jsp">최신음악</a>
-					<li class = "menuselect"><a href = "">뉴스토픽</a>
-					<li class = "menuselect"><a href = "">에디터추천</a>
+					<li class = "menuselect"><a href = "magazine.jsp">뉴스토픽</a>
 					<li class = "menuselect"><a href = "">공지사항</a>
+					<li class = "menuselect"><a href = "">통계</a>
 				</ul>
 			</table>
 		</div>
@@ -80,7 +103,7 @@
 								for (int i = 0; i < 4; i++) {
 									String x = cover.get(i);
 							%>
-							<td><a href=""><img alt="이미지 없음" src=<%=x%> width=173px,
+							<td><a href="newmusic.jsp"><img alt="이미지 없음" src=<%=x%> width=173px,
 									height=173px id="mainimage"></a></td>
 							<%
 								}
@@ -92,7 +115,7 @@
 								for (int i = 4; i < 8; i++) {
 									String x = cover.get(i);
 							%>
-							<td><a href=""><img alt="이미지 없음" src=<%=x%> width=173px,
+							<td><a href="newmusic.jsp"><img alt="이미지 없음" src=<%=x%> width=173px,
 									height=173px id="mainimage"></a></td>
 							<%
 								}
@@ -105,80 +128,51 @@
 			</div>
 			<div id = "hotsearch">
 			<h5 class = "hot" style="font-weight: bold">인기 검색어</h5>
-				<table>
-					</tr>
-					<br>
-					<!-- 인기검색어 가져오기 -->
-					<%
-						String url1 = "https://www.genie.co.kr/chart/top200";
-						Document doc = null;
-						try {
-							doc = Jsoup.connect(url1).get();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						Elements element = doc.select("div.aside_realtime"); //검색어 틀
-						// 원하는 내용이 있는 틀(?) 입력
-						ArrayList list = new ArrayList();
-						int n = 1;
-						for (Element y : element.select("a")) { // 검색어
-							String word = y.text();
+				<br>
+				<ol>
+					<% 
+						String rank = null;
+						element = doc.select("div.aside_realtime");//인기 검색어
+						
+						for(Element el : element.select("li > a")){
+							rank = el.text();
+							
 					%>
-					<tr><%=n + "위  "%>
-					<tr>
-					<tr>
-						<a href=""><%=word%></a>
-						</a>
-						<br>
-					</tr>
-					<%
-						n++;
+						<li><a href="search.jsp?search=<%= rank %>"><%= rank %></a></li>
+					<% 
 						}
 					%>
-				</table>
+				</ol>
 			</div>
 		</div>
 		
 		<div id="bottom">
 			<div id = "chart">
 				<h6>실시간 차트</h6>
-				<hr size="2" color = "black">
-				<table>
-					<tr>
-						<td>솔직하게 말해서 나</td>
-						<td>김나영</td>
-					</tr>
-					<tr>
-						<td>2002</td>
-						<td>Anne Marie</td>
-					</tr>
-					<tr>
-						<td>사랑에 연습이 있었다면(prod. by 2soo)</td>
-						<td>임재현</td>
-					</tr>
-					<tr>
-						<td>너에게 못했던 내 마지막 말은</td>
-						<td>다비치</td>
-					</tr>
-					<tr>
-						<td>누구 없소(NO ONE)(Feat. B.I of ikon)</td>
-						<td>이하이</td>
-					</tr>
-					<tr>
-						<td>bad guy</td>
-						<td>Billie Eilish</td>
-					</tr>
-					<tr>
-						<td>작은 것들을 위한 시(Boy With Luv)(feat.Halsey)</td>
-						<td>방탄소년단</td>
-					</tr>
-					<tr>
-						<td>대충 입고 나와</td>
-						<td>우디(Woody)</td>
-					</tr>
-				</table>
-			</div>
-						
+					<table>
+						<tbody>
+							<hr>
+							<%
+								dao.drop(); /* DB에 있는 자료 모두 버리고 순번 초기화 */
+								dao.top50(); /* top50개 음원 제목, 가수명 DB입력 */
+								String[] cover1 = dao.image(); /* 앨범사진 URL을 배열로 만듦 */
+								ArrayList listAll = new ArrayList();
+								listAll = dao.selectAll();
+								for (int i = 0; i < 10; i++) {
+									MusicDTO dto1 = (MusicDTO) listAll.get(i);
+									String album = cover1[i];
+							%>
+							<tr id="list">
+								<td class = "list" align="center" width=40;><%=dto1.getNum() + "위"%></td>
+								<td class = "list" align="left"><a class = "list" href="search.jsp?search=<%=dto1.getTitle()%>"><%=dto1.getTitle()%></a></td>
+								<td class = "list" align="left"><a class = "list" href="search.jsp?search=<%=dto1.getArtist()%>"><%=dto1.getArtist()%></a></td>
+							</tr>
+							<%
+								}
+							%>
+						</tbody>
+					</table>
+				</div>		
 			<div id = "container">
 				<div id = "notice">
 					<h6>공지사항</h6>
@@ -194,16 +188,38 @@
 				<div id = "news">
 					<h6>뉴스토픽</h6>
 					<hr>
-					<ul id = "news1">
-						<li id = "news1">카리스마 조장 "HTML 너무 쉬워.. 더 어려운게 필요해.."</li>
-						<li id = "news1">정보관리책임 본부장 "실시간 차트 더욱 편하게 만들겠다.."호언장담.</li>
-						<li id = "news1">대표이사 사퇴 의사 밝혀..다음 대표이사 후보는 누구?</li>
-						<li id = "news1">탤런트 D군 예비군에서 연락 끊겨..검찰 "탈주 여부 조사중.."</li>
-					</ul>
+					<table style="width: 450px; height: 220px;">
+						<%
+							String url2 = "https://www.genie.co.kr/magazine?ctid=1";
+							Document doc2 = null;
+							String title = null;
+							ArrayList list2 = new ArrayList();
+							int cnt=0;
+							try {
+								doc2 = Jsoup.connect(url2).get();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							Elements element2 = doc2.select("div.list-normal");
+							for(Element p : element2.select("div.info > p")){ //타이틀
+								list2.add(p.text());
+							}
+							for(Element img2 : element2.select("div.cover > img")){//뉴스 이미지
+								title = (String)list2.get(cnt);
+								cnt++;
+						%>
+						<tr>
+				 			<td style="font-size: 14px;"><a href = "magazine.jsp"><%= title %></a></td>
+				 		</tr>
+					 	<%
+					 		}
+					 	%>
+			 		</table>
 				</div>
 			</div>
 		</div>
-		<div id = "under">
+		<div id = "under" style="margin-top: 900px;
+		position: absolute; left: 475px; width: 900px; height: 200px; font-size: 12px;">
 				회사소개 | 이용약관 | 개인정보처리방침 | 청소년보호정책 | 이메일주소무단수집거부 | 서비스 이용문의
 			<div id = "under2">
 			</div>

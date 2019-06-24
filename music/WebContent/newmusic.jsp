@@ -32,33 +32,75 @@
 			</div>
 			
 			<div id = "login">
-				<table>
-					<tr>
-						<td>
-							<img src = "images/Camel.png">
-						</td>
-						<td>
-							<form action="">
-								<button type="submit" id = "loginbutton" class="btn btn-info">로그인</button>
-							</form>
-						</td>
-					</tr>
-				</table>
-			</div>
+            <table>
+               <tr>
+                  <td>
+                     <img src = "images/Camel.png">
+                  </td>
+                  <td width="150px">
+                     <%
+                        Object userId = session.getAttribute("InputId");
+                        if(userId != null){
+                     %>
+                     <b><%=session.getAttribute("InputId") %></b>님<br>안녕하세요 :)
+                     
+                     <form action="logout.jsp">
+                        <button type="submit" id="logout" class="btn btn-dark">로그아웃</button>
+                     </form>
+                     
+                     <%}else{%>
+                     <form action="login.jsp">
+                        <button type="submit" id = "loginbutton" class="btn btn-info">로그인</button>
+                     </form>
+                     <%} %>
+                  </td>
+               </tr>
+            </table>
+         </div>
 		</div>
 		<div id = "menu">
 			<table>
 				<ul>
 					<li class = "menuselect"><a href = "rank.jsp">음원차트</a>
 					<li class = "menuselect"><a href = "newmusic.jsp">최신음악</a>
-					<li class = "menuselect"><a href = "">뉴스토픽</a>
-					<li class = "menuselect"><a href = "">에디터추천</a>
+					<li class = "menuselect"><a href = "magazine.jsp">뉴스토픽</a>
 					<li class = "menuselect"><a href = "">공지사항</a>
+					<li class = "menuselect"><a href = "">통계</a>
 				</ul>
 			</table>
 		</div>
 		<hr class = "hr">
-		<h2 style="padding-left: 475px;">최신음악</h2>
+		<div>
+			<!-- 세션(음악번호: numList / 제목: titleList -->
+			<h2 style="padding-left: 475px;">최신음악</h2>
+			최근 재생한 음악 :
+			<%
+				ArrayList<Integer> numList = (ArrayList<Integer>) session.getAttribute("mnum");
+				ArrayList<String> titleList = (ArrayList<String>) session.getAttribute("title");
+				if (numList == null) {
+				} else if (numList.size() == 1) { //세션에 저장된 내용이 한 개 이하일 때
+			%><br>
+			<table>
+				<tbody>
+
+					<td><a href="">현재 <%=numList.get(0) + 1%>위
+						</a> <a href=""><%=titleList.get(0)%></a></td>
+
+					<%
+						} else { // 두 개 이상일 때
+							for (int i = 1; i < numList.size(); i++) {
+					%>
+					<br>
+					<td><a
+							href="player.jsp?mnum=<%=numList.get(numList.size() - i)%>"><%=titleList.get(titleList.size() - i)%></a>
+					</td>
+					<%
+						}
+						}
+					%>
+				</tbody>
+			</table>
+		</div>
 		<div id = "middle">
 			<div class = "newmusicchart1" style="width: 450; float: left">
 				<table border="5">
@@ -83,12 +125,9 @@
 					<tr>
 						<td width="100px" height="100px;" align="center"><img alt="이미지 없음" src=<%=album%>></td>
 						<td width="50px" height="100px;" align="center"><%=dto.getNum() + "위"%></td>
-						<td width="250px" height="100px;" align="center"><%=dto.getTitle()%> <br> <%=dto.getArtist()%>
-						<br>
-						<br>
-							<button type="button" name="num1"
-								class="btn btn-sm btn-block blue"
-								onclick="javascript:location.href='player.jsp?mnum=<%=i%>'">재생</button></td>
+						<td width="250px" height="100px;" align="center"><a href="search.jsp?search=<%=dto.getTitle()%>" style="word-break:break-all"><%=dto.getTitle()%></a>
+						<br> <a href="search.jsp?search=<%=dto.getArtist()%>" style="word-break:break-all"><%=dto.getArtist()%></a><br>
+							<a href="player.jsp?mnum=<%=i%>&title=<%=dto.getTitle()%>&artist=<%=dto.getArtist()%>" target="_blank" class="btn btn-primary">PLAY▶</a>
 					</tr>
 						<%
 							}
@@ -118,12 +157,9 @@
 					<tr>
 						<td width="100px" height="100px;" align="center"><img alt="이미지 없음" src=<%=album%>></td>
 						<td width="50px" height="100px;" align="center"><%=dto2.getNum()%></td>
-						<td width="250px" height="100px;" align="center"><%=dto2.getTitle()%> <br> <%=dto2.getArtist()%>
-						<br>
-						<br>
-							<button type="button" name="num1"
-								class="btn btn-sm btn-block blue"
-								onclick="javascript:location.href='player.jsp?mnum=<%=i%>'">재생</button></td>
+						<td width="250px" height="100px;" align="center"><a href="search.jsp?search=<%=dto2.getTitle()%>" style="word-break:break-all"><%=dto2.getTitle()%></a>
+						<br> <a href="search.jsp?search=<%=dto2.getArtist()%>" style="word-break:break-all"><%=dto2.getArtist()%></a><br>
+							<a href="player.jsp?mnum=<%=i%>&title=<%=dto2.getTitle()%>&artist=<%=dto2.getArtist()%>" target="_blank" class="btn btn-primary">PLAY▶</a>
 					</tr>
 						<%
 							}
@@ -131,7 +167,7 @@
 				</table>
 			</div>
 		</div>
-		<div id = "under" style="margin-top: 1500px; position: absolute; float: left;">
+		<div id = "under" style="margin-top: 1500px; position: absolute; left: 475px; float: left;">
 				회사소개 | 이용약관 | 개인정보처리방침 | 청소년보호정책 | 이메일주소무단수집거부 | 서비스 이용문의
 			<div id = "under2">
 			</div>
