@@ -16,11 +16,10 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-
 </head>
 
 <body>
-	<html id="top">
+	<html>
 		<div id="top">
 			<div id="title">
 				<a href="main.jsp"><img src="images/Title.png" style="border-radius: 10px 10px 10px 10px"></a>
@@ -73,9 +72,9 @@
 		</div>
 		<hr class="hr">
 		<!-- Example single danger button -->
-		<div>
+		<h2 style="padding-left: 475px;">TOP50</h2>
+		<div class = "sidebar">
 			<!-- 세션(음악번호: numList / 제목: titleList -->
-			<h2 style="padding-left: 475px;">TOP50</h2>
 			최근 재생한 음악 :
 			<%
 				ArrayList<Integer> numList = (ArrayList<Integer>) session.getAttribute("mnum");
@@ -84,10 +83,9 @@
 				} else if (numList.size() == 1) { //세션에 저장된 내용이 한 개 이하일 때
 			%><br>
 			<table>
-				<tbody>
-
+				<tr>
 					<td><a href="">현재 <%=numList.get(0) + 1%>위
-						</a> <a href=""><%=titleList.get(0)%></a></td>
+						</a><a href=""><%=titleList.get(0)%></a></td>
 
 					<%
 						} else { // 두 개 이상일 때
@@ -101,7 +99,7 @@
 						}
 						}
 					%>
-				</tbody>
+				</tr>
 			</table>
 		</div>
 		<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -190,6 +188,5 @@
 				<div id="under2">
 				</div>
 			</div>
-</body>
-
+	</body>
 </html>

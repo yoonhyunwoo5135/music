@@ -1,5 +1,3 @@
-<%@page import="bean.Mp3DTO"%>
-<%@page import="bean.Mp3DAO"%>
 <%@page import="java.io.Console"%>
 <%@page import="bean.MusicDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -122,7 +120,6 @@
 							%>
 	
 						</tr>
-	
 					</tbody>
 				</table>
 			</div>
